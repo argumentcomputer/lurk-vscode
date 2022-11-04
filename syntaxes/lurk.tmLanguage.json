@@ -1,0 +1,32 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "lurk",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.lurk",
+				"match": "\\b(lambda|let|letrec|cons|strcons|hide|begin|car|cdr|commit|num|comm|char|eval|open|secret|atom|emit|if)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.lurk",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.lurk",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.lurk"
+}

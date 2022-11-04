@@ -1,0 +1,25 @@
+{
+  "name": "lurk",
+  "displayName": "lurk",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.73.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "lurk",
+      "aliases": ["lurk", "lurk"],
+      "extensions": [".lurk"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "lurk",
+      "scopeName": "source.lurk",
+      "path": "./syntaxes/lurk.tmLanguage.json"
+    }]
+  }
+}
