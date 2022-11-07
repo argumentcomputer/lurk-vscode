@@ -1,15 +1,41 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "lurk",
+	"foldingStartMarker": "\\(",
+	"foldingStopMarker": "\\)",
 	"patterns": [
 		{
 			"include": "#keywords"
 		},
 		{
 			"include": "#strings"
-		}
+		},
+		{   
+			"include": "#comment"
+		}	
 	],
 	"repository": {
+		"comment": {
+			"begin": "(^[ \\t]+)?(?=;)",
+			"beginCaptures": {
+			  "1": {
+				"name": "punctuation.whitespace.comment.leading.lurk"
+			  }
+			},
+			"end": "(?!\\G)",
+			"patterns": [
+			  {
+				"begin": ";",
+				"beginCaptures": {
+				  "0": {
+					"name": "punctuation.definition.comment.lurk"
+				  }
+				},
+				"end": "\\n",
+				"name": "comment.line.semicolon.lurk"
+			  }
+			]
+		  },
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.lurk",
