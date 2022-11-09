@@ -36,17 +36,6 @@ function queueLoop() {
     }
 }
 
-function updateFilename(filename: string, runInCurrentDirectory: boolean) {
-    currentFilename = filename;
-    sendQueuedText(`__file__ = r'${filename}'`);
-    sendQueuedText('import sys');
-    sendQueuedText('import os');
-    if (runInCurrentDirectory) {
-        sendQueuedText(`os.chdir(os.path.dirname(r'${filename}'))`);
-    }
-    sendQueuedText('sys.path.append(os.path.dirname(__file__))', 100);
-}
-
 function sendQueuedText(text: string, waitTime = 10) {
     textQueue.push(text);
     waitsQueue.push(waitTime);
@@ -116,11 +105,6 @@ export function activate(context: vscode.ExtensionContext) {
             const filename = editor.document.fileName;
             let command;
 
-            // set pwd to editor file path
-            if (filename !== currentFilename && checkCwd) {
-                updateFilename(filename, config.get('runInCurrentDirectory', true));
-            }
-
             if (directSend) {
                 let docText = editor.document.getText();
                 let startRange = editor.document.offsetAt(editor.document.lineAt(startLine).range.start);
@@ -173,8 +157,11 @@ export function activate(context: vscode.ExtensionContext) {
             }
 
             await createLurkTerminal();
-
-            sendLines(sL, eL, true);
+            //let r = new vscode.Range(editor.selection.start, editor.selection.end)
+            let expr = editor.document.getText(editor.selection);
+            console.log("Sending to lurk REPL: %s", expr);
+            sendQueuedText(expr);
+            queueLoop();
         }
     };
 
