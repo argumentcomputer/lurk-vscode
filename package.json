@@ -10,7 +10,9 @@
     "Programming Languages"
   ],
   "activationEvents": [
-    "onCommand:jeff.helloWorld"
+    "onCommand:jeff.helloWorld",
+    "onCommand:lurkREPL.activate",
+    "onCommand:lurkREPL.sendSelected"
   ],
   "main": "out/extension.js",
   "contributes": {
@@ -29,7 +31,15 @@
       {
         "command": "jeff.helloWorld",
         "title": "Hello World"
-      }
+      },
+      {
+        "command": "lurkREPL.sendSelected",
+        "title": "Lurk REPL: Send Selected Text (or current line)"
+    },
+    {
+        "command": "lurkREPL.activate",
+        "title": "lurk REPL: Activate/Initialize"
+    }
     ]
   },
   "scripts": {
