@@ -10,37 +10,52 @@
     "Programming Languages"
   ],
   "activationEvents": [
-    "onCommand:jeff.helloWorld",
     "onCommand:lurkREPL.activate",
     "onCommand:lurkREPL.sendSelected"
   ],
   "main": "out/extension.js",
   "contributes": {
-    "languages": [{
-      "id": "lurk",
-      "aliases": ["lurk", "lurk"],
-      "extensions": [".lurk"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "lurk",
-      "scopeName": "source.lurk",
-      "path": "./syntaxes/lurk.tmLanguage.json"
-    }],
-    "commands": [
+    "languages": [
       {
-        "command": "jeff.helloWorld",
-        "title": "Hello World"
-      },
+        "id": "lurk",
+        "aliases": [
+          "lurk",
+          "lurk"
+        ],
+        "extensions": [
+          ".lurk"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "lurk",
+        "scopeName": "source.lurk",
+        "path": "./syntaxes/lurk.tmLanguage.json"
+      }
+    ],
+    "commands": [
       {
         "command": "lurkREPL.sendSelected",
         "title": "Lurk REPL: Send Selected Text (or current line)"
-    },
-    {
+      },
+      {
         "command": "lurkREPL.activate",
         "title": "lurk REPL: Activate/Initialize"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Lurk REPL",
+      "properties": {
+        "lurkREPL.lurkRunCommand": {
+          "type": "string",
+          "default": "/home/user/workspace/lurk-rs/target/release/lurkrs",
+          "description": "Full path to the lurk binary"
+        }
+      }
     }
-    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
