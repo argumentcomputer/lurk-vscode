@@ -30,6 +30,12 @@ In a lurk file, select an s-expression and run the command "Lurk REPL:
 Send Selected Text". It will start a lurk repl (if there isn't already
 one running), and execute the expression.
 
+If you prefer to just use the REPL directly inside VSCode just like
+you would in a terminal, you can run the command "Lurk REPL:
+Activate/Initialize" to start a REPL.
+
+The extension does not support multiple REPLs.
+
 ## Known Issues
 
 * REPL support is very basic terminal interaction

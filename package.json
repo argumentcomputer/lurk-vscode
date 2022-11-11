@@ -38,7 +38,7 @@
     "commands": [
       {
         "command": "lurkREPL.sendSelected",
-        "title": "Lurk REPL: Send Selected Text (or current line)"
+        "title": "Lurk REPL: Send Selected Text"
       },
       {
         "command": "lurkREPL.activate",
