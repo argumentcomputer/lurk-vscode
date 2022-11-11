@@ -22,6 +22,14 @@ This extension contributes the following settings:
 
 * `lurkREPL.lurkRunCommand`: The location of the lurk binary (for REPL support)
 
+Be sure to change this to point to wherever your lurk binary is.
+
+## Using
+
+In a lurk file, select an s-expression and run the command "Lurk REPL:
+Send Selected Text". It will start a lurk repl (if there isn't already
+one running), and execute the expression.
+
 ## Known Issues
 
 * REPL support is very basic terminal interaction
