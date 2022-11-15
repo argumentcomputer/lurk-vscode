@@ -13,8 +13,8 @@ evaluation.
 Run 
 
     sudo npm install -g vsce
-	sudo npm install -g typescript
-    vsce package
+    npm install
+    vsce package   # answer yes to prompts
 	code --install-extension lurk-0.0.1.vsix
 	
 ## Extension Settings
