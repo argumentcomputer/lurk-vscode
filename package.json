@@ -51,7 +51,7 @@
       "properties": {
         "lurkREPL.lurkRunCommand": {
           "type": "string",
-          "default": "/home/user/workspace/lurk-rs/target/release/lurkrs",
+          "default": "/home/user/.cargo/bin/lurk",
           "description": "Full path to the lurk binary"
         }
       }

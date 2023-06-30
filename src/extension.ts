@@ -3,13 +3,11 @@
 import * as vscode from 'vscode';
 
 const lurkTerminalName = 'Lurk REPL';
-const isString = (obj: any) => typeof obj === 'string';
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
 let lurkTerminal: vscode.Terminal | null = null;
 let textQueue: string[];
 let waitsQueue: number[];
-let currentFilename: string = "";
 let isrunning: boolean = false;
 
 function queueLoop() {
@@ -47,7 +45,7 @@ async function createLurkTerminal() {
     // create lurk terminal if it doesn't exist
     if (lurkTerminal === null || lurkTerminal.exitStatus !== undefined) {
         const config: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration('lurkREPL');
-        const lurkCommand = config.get("lurkRunCommand", "/home/user/workspace/lurk-rs/target/release/lurkrs");
+        const lurkCommand = config.get("lurkRunCommand", "/home/user/.cargo/bin/lurk");
         
         textQueue = [];
         waitsQueue = [];
@@ -91,4 +89,3 @@ export function activate(context: vscode.ExtensionContext) {
 
 // This method is called when your extension is deactivated
 export function deactivate() {}
-
