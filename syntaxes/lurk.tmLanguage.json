@@ -25,7 +25,7 @@
 			"end": "(?!\\G)",
 			"patterns": [
 			  {
-				"begin": ";",
+				"begin": ";;",
 				"beginCaptures": {
 				  "0": {
 					"name": "punctuation.definition.comment.lurk"
@@ -37,10 +37,17 @@
 			]
 		  },
 		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.lurk",
-				"match": "\\b(lambda|let|letrec|cons|strcons|hide|begin|car|cdr|commit|num|comm|char|eval|open|secret|atom|emit|if)\\b"
-			}]
+			"patterns": [
+			  {
+			    "name": "keyword.control.lurk",
+				"match": "\\b(lambda|let|letrec|cons|strcons|hide|begin|car|cdr|commit|num|comm|char|eval|open|secret|atom|emit|if|eq)\\b"
+			  },
+			  {
+				"name": "keyword.control.meta.lurk",
+				"begin": "!\\(\\s*",
+				"end": "(\\s|\\))"
+			  }
+			]
 		},
 		"strings": {
 			"name": "string.quoted.double.lurk",

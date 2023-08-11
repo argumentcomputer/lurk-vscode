@@ -10,12 +10,14 @@ evaluation.
 
 ## Installing 
 
-Run 
+Run
 
-    sudo npm install -g vsce
-    npm install
-    vsce package   # answer yes to prompts
-	code --install-extension lurk-0.0.1.vsix
+```text
+$ sudo npm install -g vsce
+$ npm install
+$ vsce package
+$ code --install-extension lurk-0.0.1.vsix
+```
 	
 ## Extension Settings
 
@@ -40,4 +42,3 @@ The extension does not support multiple REPLs.
 ## Known Issues
 
 * REPL support is very basic terminal interaction
-
