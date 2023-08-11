@@ -6,6 +6,7 @@ const lurkTerminalName = 'Lurk REPL';
 
 let lurkTerminal: vscode.Terminal | null = null;
 let textQueue: string[];
+let onLoop = false;
 
 function queueLoop() {
     if (lurkTerminal !== null) {
@@ -13,9 +14,24 @@ function queueLoop() {
         if (text) {
             lurkTerminal.sendText(text);
         }
+        if (textQueue.length > 0) {
+            // keep popping messages
+            onLoop = true;
+            setTimeout(queueLoop, 10);
+        } else {
+            onLoop = false;
+        }
     } else {
+        onLoop = true;
         setTimeout(queueLoop, 100);
     }
+}
+
+function triggerLoop() {
+    if (onLoop) {
+        return;
+    }
+    queueLoop();
 }
 
 async function createLurkTerminal() {
@@ -52,7 +68,7 @@ export function activate(context: vscode.ExtensionContext) {
             let text = editor.document.getText(editor.selection);
             console.log("Sending to lurk REPL: %s", text);
             textQueue.push(text);
-            queueLoop();
+            triggerLoop();
         }
     };
 
