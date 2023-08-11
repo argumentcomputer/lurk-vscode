@@ -44,6 +44,12 @@
         "title": "lurk REPL: Activate/Initialize"
       }
     ],
+    "keybindings": [
+      {
+        "command": "lurkREPL.sendSelected",
+        "key": "alt+right"
+      }
+    ],
     "configuration": {
       "type": "object",
       "title": "Lurk REPL",

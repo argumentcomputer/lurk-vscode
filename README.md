@@ -1,12 +1,11 @@
 # Lurk VSCode extension
 
-This extension adds some basic support for lurk in VS Code. 
+This extension adds some basic support for Lurk in VS Code. 
 
 ## Features
 
-At this point, there is code highlighting, and the ability to run a
-lurk repl and send code blocks from a source file to the repl for
-evaluation.
+* Start a Lurk REPL
+* Send code to be run in the Lurk REPL
 
 ## Installing 
 
@@ -23,15 +22,16 @@ $ code --install-extension lurk-0.0.1.vsix
 
 This extension contributes the following settings:
 
-* `lurkREPL.lurkRunCommand`: The location of the lurk binary (for REPL support)
+* `lurkREPL.lurkRunCommand`: The location of the Lurk binary (for REPL support)
 
-Be sure to change this to point to wherever your lurk binary is.
+Be sure to change this to point to wherever your Lurk binary is.
 
 ## Using
 
 In a lurk file, select an s-expression and run the command "Lurk REPL:
 Send Selected Text". It will start a lurk repl (if there isn't already
-one running), and execute the expression.
+one running), and execute the expression. The key binding for this is
+`alt+right`.
 
 If you prefer to just use the REPL directly inside VSCode just like
 you would in a terminal, you can run the command "Lurk REPL:
