@@ -3,42 +3,35 @@
 import * as vscode from 'vscode';
 
 const lurkTerminalName = 'Lurk REPL';
-const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
 let lurkTerminal: vscode.Terminal | null = null;
 let textQueue: string[];
-let waitsQueue: number[];
-let isrunning: boolean = false;
+let onLoop = false;
 
 function queueLoop() {
-    const config = vscode.workspace.getConfiguration("lurkREPL");
-    const directSend = config.get('sendTextDirectly');
-    if (textQueue.length > 0 && lurkTerminal !== null) {
-        isrunning = true;
+    if (lurkTerminal !== null) {
         const text = textQueue.shift();
-        const waitTime = waitsQueue.shift();
         if (text) {
-	    lurkTerminal.sendText(text);
-            setTimeout(queueLoop, waitTime!);
-	}
-    } else {
-        if (isrunning) {            
-            if (textQueue.length === 0 && lurkTerminal !== null) {
-                isrunning = false;
-            };
+            lurkTerminal.sendText(text);
+        }
+        if (textQueue.length > 0) {
+            // keep popping messages
+            onLoop = true;
+            setTimeout(queueLoop, 10);
         } else {
-            if (!directSend && lurkTerminal !== null){
-                lurkTerminal.sendText('\n', false);
-            }
-            return;
-        };
+            onLoop = false;
+        }
+    } else {
+        onLoop = true;
         setTimeout(queueLoop, 100);
     }
 }
 
-function sendQueuedText(text: string, waitTime = 10) {
-    textQueue.push(text);
-    waitsQueue.push(waitTime);
+function triggerLoop() {
+    if (onLoop) {
+        return;
+    }
+    queueLoop();
 }
 
 async function createLurkTerminal() {
@@ -48,7 +41,6 @@ async function createLurkTerminal() {
         const lurkCommand = config.get("lurkRunCommand", "/home/user/.cargo/bin/lurk");
         
         textQueue = [];
-        waitsQueue = [];
 
         const terminalOptions = {
             name: lurkTerminalName,
@@ -57,9 +49,7 @@ async function createLurkTerminal() {
         };
 
         lurkTerminal = vscode.window.createTerminal(terminalOptions);
-        lurkTerminal.show(true);  //defalt: true
-
-        await delay(config.get("lurkCommandTimeout", 300));
+        lurkTerminal.show(true);
     } 
 }
 
@@ -75,11 +65,10 @@ export function activate(context: vscode.ExtensionContext) {
         const editor = vscode.window.activeTextEditor;
         if (editor) {
             await createLurkTerminal();
-            //let r = new vscode.Range(editor.selection.start, editor.selection.end)
-            let expr = editor.document.getText(editor.selection);
-            console.log("Sending to lurk REPL: %s", expr);
-            sendQueuedText(expr);
-            queueLoop();
+            let text = editor.document.getText(editor.selection);
+            console.log("Sending to lurk REPL: %s", text);
+            textQueue.push(text);
+            triggerLoop();
         }
     };
 
