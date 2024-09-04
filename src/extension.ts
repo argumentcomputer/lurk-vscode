@@ -10,7 +10,7 @@ function getTerminal(): vscode.Terminal {
     // create lurk terminal if it doesn't exist
     if (lurkTerminal === null || lurkTerminal.exitStatus !== undefined) {
         const config: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration('lurkREPL');
-        const lurkCommand = config.get("lurkRunCommand", "/home/user/.cargo/bin/lurk");
+        const lurkCommand = config.get("lurkRunCommand", "${userHome}/.cargo/bin/lurk");
 
         const terminalOptions = {
             name: lurkTerminalName,

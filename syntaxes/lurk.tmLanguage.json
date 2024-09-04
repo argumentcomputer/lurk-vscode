@@ -66,8 +66,7 @@
 		},
 		"char": {
 			"name": "constant.character",
-			"begin": "'",
-			"end": "'"
+			"match": "'\\\\?.'"
 		}
 	},
 	"scopeName": "source.lurk"
