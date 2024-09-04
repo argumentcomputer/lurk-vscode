@@ -12,7 +12,7 @@
   "main": "out/extension.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lurk-lab/lurk-vscode/"
+    "url": "https://github.com/argumentcomputer/lurk-vscode/"
   },
   "contributes": {
     "languages": [
@@ -36,15 +36,19 @@
     ],
     "commands": [
       {
-        "command": "lurkREPL.sendSelected",
-        "title": "Lurk REPL: Send Selected Text"
+        "command": "lurkREPL.start",
+        "title": "Lurk REPL: Start"
       },
       {
-        "command": "lurkREPL.activate",
-        "title": "lurk REPL: Activate/Initialize"
+        "command": "lurkREPL.sendSelected",
+        "title": "Lurk REPL: Send Selected Text"
       }
     ],
     "keybindings": [
+      {
+        "command": "lurkREPL.start",
+        "key": "alt+enter"
+      },
       {
         "command": "lurkREPL.sendSelected",
         "key": "alt+right"
