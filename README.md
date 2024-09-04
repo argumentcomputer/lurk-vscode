@@ -24,18 +24,16 @@ This extension contributes the following settings:
 
 * `lurkREPL.lurkRunCommand`: The location of the Lurk binary (for REPL support)
 
-Be sure to change this to point to wherever your Lurk binary is.
+Be sure to change this to point to your Lurk binary.
 
-## Using
+## Usage
 
-In a lurk file, select an s-expression and run the command "Lurk REPL:
-Send Selected Text". It will start a lurk repl (if there isn't already
-one running), and execute the expression. The key binding for this is
-`alt+right`.
+In a Lurk file, select an s-expression and run the command "Lurk REPL: Send Selected Text".
+It will start a Lurk REPL (if there isn't already one running), and execute the expression.
+The key binding for this is `alt+right`.
 
-If you prefer to just use the REPL directly inside VSCode just like
-you would in a terminal, you can run the command "Lurk REPL:
-Activate/Initialize" to start a REPL.
+To just open the Lurk REPL, run the command "Lurk REPL: Start".
+The key binding for this is `alt+enter`.
 
 The extension does not support multiple REPLs.
 

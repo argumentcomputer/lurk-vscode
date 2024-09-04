@@ -4,22 +4,18 @@
 	"foldingStartMarker": "\\(",
 	"foldingStopMarker": "\\)",
 	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		},
-		{   
-			"include": "#comment"
-		}	
+		{ "include": "#comment" },	
+		{ "include": "#builtin" },
+		{ "include": "#meta" },
+		{ "include": "#string" },
+		{ "include": "#char" }
 	],
 	"repository": {
 		"comment": {
 			"begin": "(^[ \\t]+)?(?=;)",
 			"beginCaptures": {
 			  "1": {
-				"name": "punctuation.whitespace.comment.leading.lurk"
+				"name": "punctuation.whitespace.comment.leading"
 			  }
 			},
 			"end": "(?!\\G)",
@@ -28,37 +24,49 @@
 				"begin": ";",
 				"beginCaptures": {
 				  "0": {
-					"name": "punctuation.definition.comment.lurk"
+					"name": "punctuation.definition.comment"
 				  }
 				},
 				"end": "\\n",
-				"name": "comment.line.semicolon.lurk"
+				"name": "comment.line.semicolon"
 			  }
 			]
 		  },
-		"keywords": {
+		"builtin": {
 			"patterns": [
 			  {
-			    "name": "keyword.control.lurk",
-				"match": "\\b(lambda|let|letrec|cons|strcons|hide|begin|car|cdr|commit|num|comm|char|eval|open|secret|atom|emit|if|eq)\\b"
+			    "name": "keyword.control",
+				"match": "(?<=[(\\s])\\b(atom|begin|car|cdr|char|commit|comm|bignum|cons|current-env|emit|empty-env|eval|eq|type-eq|type-eqq|hide|if|lambda|let|letrec|nil|u64|open|quote|secret|strcons|t|breakpoint)\\b"
 			  },
 			  {
-				"name": "keyword.control.meta.lurk",
+			    "name": "keyword.control",
+				"match": "(?<=[(\\s])([+-/<>=%\\\\*]|<=|>=)(?=[)\\s])"
+			  }
+			]
+		},
+		"meta": {
+			"patterns": [
+			  {
+				"name": "keyword.other",
 				"begin": "!\\(\\s*",
 				"end": "(\\s|\\))"
 			  }
 			]
 		},
-		"strings": {
-			"name": "string.quoted.double.lurk",
+		"string": {
+			"name": "string.quoted.double",
 			"begin": "\"",
 			"end": "\"",
 			"patterns": [
 				{
-					"name": "constant.character.escape.lurk",
+					"name": "constant.character.escape",
 					"match": "\\\\."
 				}
 			]
+		},
+		"char": {
+			"name": "constant.character",
+			"match": "'\\\\?.'"
 		}
 	},
 	"scopeName": "source.lurk"
