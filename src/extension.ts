@@ -1,13 +1,23 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
+// Import the 'vscode' module to use the VS Code extensibility API
 import * as vscode from 'vscode';
 
+// Define a unique name for the Lurk REPL terminal
 const lurkTerminalName = 'Lurk REPL';
 
+// Store a reference to the Lurk REPL terminal (if it has been created)
 let lurkTerminal: vscode.Terminal | null = null;
 
+/**
+ * Gets or creates the Lurk REPL terminal instance.
+ *
+ * If the terminal doesn't exist, or if it was closed (determined by checking
+ * the `exitStatus` property), this function creates a new terminal with settings
+ * based on the 'lurkREPL' configuration.
+ *
+ * @returns {vscode.Terminal} The active or newly created Lurk REPL terminal instance.
+ */
 function getTerminal(): vscode.Terminal {
-    // create lurk terminal if it doesn't exist
+    // Create the Lurk terminal if it doesn't already exist or if it was closed.
     if (lurkTerminal === null || lurkTerminal.exitStatus !== undefined) {
         const config: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration('lurkREPL');
         const lurkCommand = config.get("lurkRunCommand", "${userHome}/.cargo/bin/lurk");
@@ -24,8 +34,15 @@ function getTerminal(): vscode.Terminal {
     return lurkTerminal;
 }
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+/**
+ * When the extension is activated, it registers two commands:
+ *   - `lurkREPL.start`: Initializes the Lurk REPL terminal.
+ *   - `lurkREPL.sendSelected`: Sends the currently selected text in the editor
+ *     to the Lurk REPL terminal for evaluation.
+ *
+ * @param {vscode.ExtensionContext} context - The extension context for managing resources
+ *   and subscriptions.
+ */
 export function activate(context: vscode.ExtensionContext) {
     function start () {
         getTerminal();
