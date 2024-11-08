@@ -1,73 +1,69 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "lurk",
-	"foldingStartMarker": "\\(",
-	"foldingStopMarker": "\\)",
-	"patterns": [
-		{ "include": "#comment" },	
-		{ "include": "#builtin" },
-		{ "include": "#meta" },
-		{ "include": "#string" },
-		{ "include": "#char" }
-	],
-	"repository": {
-		"comment": {
-			"begin": "(^[ \\t]+)?(?=;)",
-			"beginCaptures": {
-			  "1": {
-				"name": "punctuation.whitespace.comment.leading"
-			  }
-			},
-			"end": "(?!\\G)",
-			"patterns": [
-			  {
-				"begin": ";",
-				"beginCaptures": {
-				  "0": {
-					"name": "punctuation.definition.comment"
-				  }
-				},
-				"end": "\\n",
-				"name": "comment.line.semicolon"
-			  }
-			]
-		  },
-		"builtin": {
-			"patterns": [
-			  {
-			    "name": "keyword.control",
-				"match": "(?<=[(\\s])\\b(atom|begin|car|cdr|char|commit|comm|bignum|cons|current-env|emit|empty-env|eval|eq|type-eq|type-eqq|hide|if|lambda|let|letrec|nil|u64|open|quote|secret|strcons|t|breakpoint)\\b"
-			  },
-			  {
-			    "name": "keyword.control",
-				"match": "(?<=[(\\s])([+-/<>=%\\\\*]|<=|>=)(?=[)\\s])"
-			  }
-			]
-		},
-		"meta": {
-			"patterns": [
-			  {
-				"name": "keyword.other",
-				"begin": "!\\(\\s*",
-				"end": "(\\s|\\))"
-			  }
-			]
-		},
-		"string": {
-			"name": "string.quoted.double",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape",
-					"match": "\\\\."
-				}
-			]
-		},
-		"char": {
-			"name": "constant.character",
-			"match": "'\\\\?.'"
-		}
-	},
-	"scopeName": "source.lurk"
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "lurk",
+  "foldingStartMarker": "\\(",
+  "foldingStopMarker": "\\)",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#builtin" },
+    { "include": "#meta" },
+    { "include": "#string" },
+    { "include": "#char" }
+  ],
+  "repository": {
+    "comment": {
+      "begin": "(^[ \\t]+)?(?=;)",
+      "beginCaptures": { "1": { "name": "punctuation.whitespace.comment.leading" } },
+      "end": "(?!\\G)",
+      "patterns": [
+        {
+          "begin": ";",
+          "beginCaptures": { "0": { "name": "punctuation.definition.comment" } },
+          "end": "\\n",
+          "name": "comment.line.semicolon"
+        }
+      ]
+    },
+    "builtin": {
+      "patterns": [
+        {
+          "name": "keyword.control",
+          "match": "(?<=[(\\s])(?:nil|t|&rest)(?=[)\\s])"
+        },
+        {
+          "name": "keyword.control",
+          "match": "(?<=[(\\s])\\b(atom|apply|begin|car|cdr|char|commit|comm|bignum|cons|current-env|emit|empty-env|eval|eq|eqq|type-eq|type-eqq|hide|if|lambda|let|letrec|u64|open|quote|secret|strcons|list|breakpoint|fail)\\b(?=[)\\s])"
+        },
+        {
+          "name": "keyword.control",
+          "match": "(?<=[(\\s])([+-/<>=%\\\\*]|<=|>=)(?=[)\\s])"
+        }
+      ]
+    },
+    "meta": {
+      "patterns": [
+        {
+          "name": "keyword.other",
+          "begin": "!\\(\\s*",
+          "end": "(\\s|\\))"
+        }
+      ]
+    },
+    "string": {
+      "name": "string.quoted.double",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "char": {
+      "name": "constant.character",
+      "match": "'\\\\?.'"
+    }
+  },
+  "scopeName": "source.lurk"
 }
