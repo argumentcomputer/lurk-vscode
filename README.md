@@ -12,7 +12,7 @@ This extension adds some basic support for Lurk in VS Code.
 Run
 
 ```text
-$ sudo npm install -g vsce
+$ sudo npm install -g @vscode/vsce
 $ npm install
 $ vsce package
 $ code --install-extension lurk-0.0.1.vsix
